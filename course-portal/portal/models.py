@@ -110,3 +110,11 @@ class ResetToken(db.Model):
     expires_at = db.Column(db.DateTime, nullable=False)
     used = db.Column(db.Boolean, nullable=False, default=False)
     user = db.relationship("User")
+
+
+class Extension(db.Model):
+    """N2: an approved late-submission extension for one student/assignment."""
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    assignment_id = db.Column(db.Integer, db.ForeignKey("assignment.id"), nullable=False)
+    approved = db.Column(db.Boolean, nullable=False, default=True)
